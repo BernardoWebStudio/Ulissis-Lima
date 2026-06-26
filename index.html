@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Cadastre-se como apoiador da pré-campanha de Ulissis Lima.">
+<title>Apoie Ulissis Lima | Pré-Campanha 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* PALETA: Azul #1A56DB (principal) | Verde #0B7A3E | Amarelo #C79A00 | Branco #fff */
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:'Inter',sans-serif;
+  background:#eef3fa;
+  color:#2c2c2c;
+  min-height:100vh;
+  padding:2.5rem 1rem 4rem;
+}
+
+.wrap{max-width:640px;margin:0 auto}
+
+/* HEADER */
+.header{text-align:center;margin-bottom:2rem}
+.header h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(24px,5vw,34px);
+  font-weight:700;color:#1A56DB;
+  line-height:1.2;margin-bottom:.6rem;
+}
+.header h1 span{color:#C79A00}
+.header p{font-size:14px;color:#6b7280;line-height:1.7}
+
+/* CARD ÚNICO */
+.card{
+  background:#fff;
+  border-radius:20px;
+  padding:2.25rem 2.25rem;
+  border:1px solid #dbeafe;
+  box-shadow:0 2px 24px rgba(26,86,219,.08);
+}
+
+/* SECTION TITLE */
+.sec-title{
+  display:flex;align-items:center;gap:11px;
+  margin-bottom:1.2rem;
+  padding-bottom:.75rem;
+  border-bottom:2px solid #dbeafe;
+}
+.num{
+  width:32px;height:32px;border-radius:50%;
+  background:#1A56DB;color:#fff;
+  font-size:14px;font-weight:600;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.sec-title h2{font-size:16px;font-weight:600;color:#1A56DB}
+.sec-desc{font-size:13px;color:#9ca3af;margin:-4px 0 1rem 43px}
+
+/* Separador */
+.sep{border:none;border-top:1.5px solid #dbeafe;margin:1.75rem 0}
+
+/* FIELDS */
+.field{margin-bottom:1rem}
+.field-label{font-size:11px;font-weight:600;color:#9ca3af;letter-spacing:.7px;text-transform:uppercase;margin-bottom:5px}
+.input-wrap{
+  display:flex;align-items:center;gap:10px;
+  background:#f0f6ff;border:1.5px solid #dbeafe;
+  border-radius:11px;padding:10px 13px;
+  transition:border .2s,box-shadow .2s;
+}
+.input-wrap:focus-within{border-color:#1A56DB;box-shadow:0 0 0 3px rgba(26,86,219,.12)}
+.input-wrap.err{border-color:#e53935}
+.input-wrap svg{color:#1A56DB;flex-shrink:0;width:17px;height:17px}
+.input-wrap input,
+.input-wrap select,
+.input-wrap textarea{
+  background:transparent;border:none;outline:none;
+  font-family:'Inter',sans-serif;font-size:14px;
+  color:#2c2c2c;width:100%;
+}
+.input-wrap select{appearance:none;-webkit-appearance:none;cursor:pointer}
+.input-wrap textarea{resize:vertical;min-height:85px;line-height:1.6}
+input::placeholder,textarea::placeholder{color:#c3d4f0}
+.err-msg{font-size:11px;color:#e53935;display:none;margin-top:3px;padding-left:2px}
+.err-msg.show{display:block}
+
+/* TOGGLE CARDS */
+.toggle-group{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.toggle-card{
+  display:flex;align-items:center;gap:11px;
+  padding:13px 15px;border-radius:12px;
+  border:1.5px solid #dbeafe;
+  cursor:pointer;transition:all .18s;
+  background:#f0f6ff;user-select:none;
+}
+.toggle-card:hover{border-color:#1A56DB;background:#e8f0fe}
+.toggle-card.selected-yes{border-color:#0B7A3E;background:#f0faf4}
+.toggle-card.selected-no{border-color:#cbd5e1;background:#f8fafc}
+.toggle-icon{
+  width:28px;height:28px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;font-size:13px;
+  background:#dbeafe;color:#1A56DB;transition:all .18s;
+}
+.toggle-card.selected-yes .toggle-icon{background:#0B7A3E;color:#fff}
+.toggle-card.selected-no  .toggle-icon{background:#cbd5e1;color:#fff}
+.toggle-label{font-size:14px;font-weight:500;color:#2c2c2c}
+.err-toggle{font-size:11px;color:#e53935;display:none;margin-top:4px}
+.err-toggle.show{display:block}
+
+/* LGPD */
+.lgpd-box{
+  background:#f0f6ff;border:1.5px solid #dbeafe;
+  border-radius:13px;padding:1.1rem 1.2rem;margin-bottom:1.25rem;
+}
+.lgpd-head{display:flex;align-items:center;gap:8px;margin-bottom:.5rem}
+.lgpd-head svg{color:#C79A00;width:18px;height:18px;flex-shrink:0}
+.lgpd-head span{font-size:13px;font-weight:600;color:#1A56DB}
+.lgpd-text{font-size:12px;color:#6b7280;line-height:1.7;margin-bottom:.9rem}
+
+/* CHECKBOXES */
+.check-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:.5rem}
+.check-item{
+  display:flex;align-items:center;gap:9px;font-size:13px;
+  cursor:pointer;padding:10px 12px;
+  border:1.5px solid #dbeafe;border-radius:11px;
+  transition:all .18s;color:#2c2c2c;background:#f0f6ff;
+}
+.check-item:hover{border-color:#1A56DB;background:#e8f0fe}
+.check-item input[type=checkbox]{accent-color:#0B7A3E;width:15px;height:15px;cursor:pointer;flex-shrink:0}
+.check-item:has(input:checked){border-color:#0B7A3E;background:#f0faf4}
+
+/* SUBMIT — verde com texto branco */
+.btn-submit{
+  width:100%;padding:16px;
+  background:#0B7A3E;color:#fff;
+  border:none;border-radius:13px;
+  font-family:'Inter',sans-serif;
+  font-size:14px;font-weight:700;letter-spacing:1.5px;
+  cursor:pointer;transition:all .22s;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+}
+.btn-submit:hover{background:#085f30}
+.btn-submit:active{transform:scale(.99)}
+.btn-submit:disabled{background:#6ee7b7;cursor:not-allowed}
+.spinner{width:17px;height:17px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.safety{text-align:center;font-size:12px;color:#9ca3af;margin-top:.7rem;display:flex;align-items:center;justify-content:center;gap:5px}
+.safety svg{width:13px;height:13px;color:#0B7A3E}
+
+/* SUCCESS */
+#successWrap{display:none}
+.success-icon{width:80px;height:80px;border-radius:50%;background:#dbeafe;margin:0 auto 1.25rem;display:flex;align-items:center;justify-content:center}
+.success-icon svg{width:38px;height:38px;color:#1A56DB}
+#successWrap h2{font-family:'Playfair Display',serif;font-size:24px;color:#1A56DB;margin-bottom:.6rem;text-align:center}
+#successWrap p{font-size:14px;color:#6b7280;line-height:1.8;text-align:center;margin-bottom:1.5rem}
+.divider-gold{width:48px;height:3px;background:#C79A00;border-radius:2px;margin:.6rem auto 1.25rem}
+.btn-back{padding:11px 30px;background:#fff;color:#1A56DB;border:2px solid #1A56DB;border-radius:11px;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:all .2s;display:block;margin:0 auto}
+.btn-back:hover{background:#1A56DB;color:#fff}
+
+@media(max-width:500px){
+  .card{padding:1.5rem 1.1rem}
+  .toggle-group{grid-template-columns:1fr}
+  .check-grid{grid-template-columns:1fr}
+  body{padding:1.5rem .75rem 3rem}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap" id="formWrap">
+  <div class="header">
+    <h1>QUERO DAR O <span>PRIMEIRO PASSO</span></h1>
+    <p>Preencha seus dados para apoiar a pré-campanha de Ulissis Lima.</p>
+  </div>
+
+  <div class="card">
+    <form id="apoiadorForm" novalidate>
+
+      <!-- 1 IDENTIFICAÇÃO -->
+      <div class="sec-title">
+        <div class="num">1</div>
+        <h2>Identificação</h2>
+      </div>
+
+      <div class="field">
+        <div class="field-label">Nome completo</div>
+        <div class="input-wrap" id="wrap-nome">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
+          <input type="text" id="nome" placeholder="Digite seu nome completo">
+        </div>
+        <span class="err-msg" id="err-nome">Informe seu nome completo.</span>
+      </div>
+
+      <div class="field">
+        <div class="field-label">WhatsApp</div>
+        <div class="input-wrap" id="wrap-cel">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+          <input type="text" id="cel" placeholder="(61) 99999-9999" maxlength="15">
+        </div>
+        <span class="err-msg" id="err-cel">Informe um número válido.</span>
+      </div>
+
+      <div class="field">
+        <div class="field-label">Região Administrativa</div>
+        <div class="input-wrap" id="wrap-regiao">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+          <select id="regiao">
+            <option value="">Selecione sua região</option>
+            <option>Asa Norte</option><option>Asa Sul</option><option>Águas Claras</option>
+            <option>Brazlândia</option><option>Candangolândia</option><option>Ceilândia</option>
+            <option>Cruzeiro</option><option>Fercal</option><option>Gama</option>
+            <option>Guará</option><option>Itapoã</option><option>Jardim Botânico</option>
+            <option>Lago Norte</option><option>Lago Sul</option><option>Núcleo Bandeirante</option>
+            <option>Octogonal</option><option>Paranoá</option><option>Park Way</option>
+            <option>Planaltina</option><option>Plano Piloto</option><option>Recanto das Emas</option>
+            <option>Riacho Fundo</option><option>Riacho Fundo II</option><option>Samambaia</option>
+            <option>Santa Maria</option><option>São Sebastião</option><option>SCIA/Estrutural</option>
+            <option>SIA</option><option>Sobradinho</option><option>Sobradinho II</option>
+            <option>Sol Nascente/Pôr do Sol</option><option>Sudoeste/Octogonal</option>
+            <option>Taguatinga</option><option>Varjão</option><option>Vicente Pires</option>
+            <option>Outra</option>
+          </select>
+        </div>
+        <span class="err-msg" id="err-regiao">Selecione sua região.</span>
+      </div>
+
+      <hr class="sep">
+
+      <!-- 2 VÍNCULO COMUNITÁRIO -->
+      <div class="sec-title">
+        <div class="num">2</div>
+        <h2>Vínculo comunitário</h2>
+      </div>
+      <p class="sec-desc">Você participa de alguma comunidade religiosa ou grupo?</p>
+      <div class="toggle-group" id="grp-comunidade">
+        <div class="toggle-card" data-group="comunidade" data-val="sim" onclick="selectToggle(this)">
+          <div class="toggle-icon">✓</div>
+          <span class="toggle-label">Sim, participo</span>
+        </div>
+        <div class="toggle-card" data-group="comunidade" data-val="nao" onclick="selectToggle(this)">
+          <div class="toggle-icon">✕</div>
+          <span class="toggle-label">Não, no momento</span>
+        </div>
+      </div>
+      <span class="err-toggle" id="err-comunidade">Selecione uma opção.</span>
+
+      <!-- campos extras comunidade -->
+      <div id="extra-comunidade" style="display:none;margin-top:1rem">
+        <div class="field">
+          <div class="field-label">Qual comunidade / grupo / paróquia / igreja?</div>
+          <div class="input-wrap">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>
+            <input type="text" id="comunidade_nome" placeholder="Ex.: Paróquia São José">
+          </div>
+        </div>
+        <div class="field">
+          <div class="field-label">Qual o seu papel?</div>
+          <div class="input-wrap">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
+            <select id="comunidade_papel">
+              <option value="">Selecione</option>
+              <option>Membro</option>
+              <option>Líder / Coordenador</option>
+              <option>Pastor / Padre / Diácono</option>
+              <option>Ministério de louvor</option>
+              <option>Voluntário</option>
+              <option>Outro</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <hr class="sep">
+
+      <!-- 3 APOIO -->
+      <div class="sec-title">
+        <div class="num">3</div>
+        <h2>Apoio</h2>
+      </div>
+
+      <div class="field">
+        <div class="field-label">Como você ficou sabendo do pré-candidato Ulissis Lima?</div>
+        <div class="input-wrap" id="wrap-como">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          <select id="como">
+            <option value="">Selecione</option>
+            <option value="instagram">Instagram</option>
+            <option value="facebook">Facebook</option>
+            <option value="whatsapp">WhatsApp</option>
+            <option value="indicacao">Indicação de amigo</option>
+            <option value="evento">Evento</option>
+            <option value="tv_radio">TV / Rádio</option>
+            <option value="outro">Outro</option>
+          </select>
+        </div>
+        <span class="err-msg" id="err-como">Selecione uma opção.</span>
+      </div>
+
+      <div class="field">
+        <div class="field-label">Você já acompanha o trabalho do Ulissis?</div>
+        <div class="input-wrap" id="wrap-acompanha">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
+          <select id="acompanha">
+            <option value="">Selecione</option>
+            <option value="sim_muito">Sim, acompanho de perto</option>
+            <option value="sim_pouco">Sim, um pouco</option>
+            <option value="nao">Não, é a primeira vez</option>
+          </select>
+        </div>
+        <span class="err-msg" id="err-acompanha">Selecione uma opção.</span>
+      </div>
+
+      <hr class="sep">
+
+      <!-- 4 COMO POSSO AJUDAR -->
+      <div class="sec-title">
+        <div class="num">4</div>
+        <h2>Como posso ajudar</h2>
+      </div>
+      <p class="sec-desc">Você gostaria de contribuir com a pré-campanha?</p>
+      <div class="toggle-group" id="grp-ajudar">
+        <div class="toggle-card" data-group="ajudar" data-val="sim" onclick="selectToggle(this)">
+          <div class="toggle-icon">✓</div>
+          <span class="toggle-label">Sim, quero ajudar</span>
+        </div>
+        <div class="toggle-card" data-group="ajudar" data-val="nao" onclick="selectToggle(this)">
+          <div class="toggle-icon">✕</div>
+          <span class="toggle-label">Apenas acompanhar</span>
+        </div>
+      </div>
+      <span class="err-toggle" id="err-ajudar">Selecione uma opção.</span>
+
+      <!-- campos extras ajudar -->
+      <div id="extra-ajudar" style="display:none;margin-top:1rem">
+        <div class="field-label" style="margin-bottom:.6rem">De que forma? (marque uma ou mais)</div>
+        <div class="check-grid">
+          <label class="check-item"><input type="checkbox" name="formas" value="orando"> 🙏 Orando pela campanha</label>
+          <label class="check-item"><input type="checkbox" name="formas" value="redes"> 📣 Divulgando nas minhas redes sociais</label>
+          <label class="check-item"><input type="checkbox" name="formas" value="indicando"> 👥 Indicando para amigos e familiares</label>
+          <label class="check-item"><input type="checkbox" name="formas" value="falando"> 🎤 Falando sobre o Ulissis na minha comunidade</label>
+          <label class="check-item"><input type="checkbox" name="formas" value="material"> 🏠 Recebendo material de campanha</label>
+          <label class="check-item"><input type="checkbox" name="formas" value="ponto_apoio"> 📍 Sendo ponto de apoio no meu bairro</label>
+          <label class="check-item"><input type="checkbox" name="formas" value="musica"> 🎵 Apoio com música / eventos</label>
+          <label class="check-item"><input type="checkbox" name="formas" value="voluntario"> 💬 Quero ser voluntário ativo</label>
+          <label class="check-item"><input type="checkbox" name="formas" value="habilidade"> 🙌 Tenho uma habilidade específica</label>
+        </div>
+      </div>
+
+      <hr class="sep">
+
+      <!-- 5 ENCERRAMENTO -->
+      <div class="sec-title">
+        <div class="num">5</div>
+        <h2>Encerramento</h2>
+      </div>
+
+      <div class="field">
+        <div class="field-label">Deixe um recado para o Ulissis (opcional)</div>
+        <div class="input-wrap">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" style="align-self:flex-start;margin-top:2px"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"/></svg>
+          <textarea id="msg" placeholder="Sua mensagem, oração ou apoio..."></textarea>
+        </div>
+      </div>
+
+      <!-- LGPD -->
+      <div class="lgpd-box">
+        <div class="lgpd-head">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+          <span>Consentimento — LGPD</span>
+        </div>
+        <p class="lgpd-text">Ao preencher este formulário, você autoriza o uso do seu contato para receber comunicações da pré-campanha de Ulissis Lima, conforme a LGPD (Lei 13.709/2018). Seus dados não serão compartilhados com terceiros. Você pode cancelar o recebimento a qualquer momento.</p>
+        <div class="toggle-group" id="grp-lgpd">
+          <div class="toggle-card" data-group="lgpd" data-val="sim" onclick="selectToggle(this)">
+            <div class="toggle-icon">✓</div>
+            <span class="toggle-label">SIM, autorizo</span>
+          </div>
+          <div class="toggle-card" data-group="lgpd" data-val="nao" onclick="selectToggle(this)">
+            <div class="toggle-icon">✕</div>
+            <span class="toggle-label">NÃO autorizo</span>
+          </div>
+        </div>
+        <span class="err-toggle" id="err-lgpd">Você precisa fazer uma escolha para continuar.</span>
+      </div>
+
+      <button type="submit" class="btn-submit" id="btnSubmit">
+        <span id="btnText">CONFIRMAR CADASTRO</span>
+        <div class="spinner" id="spinner"></div>
+      </button>
+      <div class="safety">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/></svg>
+        Seus dados estão seguros conosco.
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<!-- SUCCESS -->
+<div class="wrap" id="successWrap">
+  <div class="card" style="text-align:center;padding:3rem 2rem">
+    <div class="success-icon">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    </div>
+    <h2 style="font-family:'Playfair Display',serif;font-size:24px;color:#2c2c2c;margin-bottom:.5rem">Cadastro realizado com sucesso!</h2>
+    <div class="divider-gold"></div>
+    <p style="font-size:14px;color:#888;line-height:1.8;margin-bottom:1.75rem">Obrigado por fazer parte desta caminhada.<br>Sua participação é muito importante para nós.<br>Em breve nossa equipe poderá entrar em contato.</p>
+    <button class="btn-back" onclick="resetForm()">← Voltar ao início</button>
+  </div>
+</div>
+
+<script>
+const toggleState = {}
+
+function selectToggle(card){
+  const group = card.dataset.group
+  const val   = card.dataset.val
+  toggleState[group] = val
+  document.querySelectorAll(`.toggle-card[data-group="${group}"]`).forEach(c => {
+    c.classList.remove('selected-yes','selected-no')
+  })
+  card.classList.add(val === 'sim' ? 'selected-yes' : 'selected-no')
+  const err = document.getElementById('err-' + group)
+  if(err) err.classList.remove('show')
+
+  // Mostrar campos extras condicionais
+  const extra = document.getElementById('extra-' + group)
+  if(extra) extra.style.display = val === 'sim' ? 'block' : 'none'
+}
+
+document.getElementById('cel').addEventListener('input', function(){
+  let v = this.value.replace(/\D/g,'')
+  if(v.length <= 10) this.value = v.replace(/(\d{2})(\d{4})(\d*)/,'($1) $2-$3')
+  else this.value = v.replace(/(\d{2})(\d{5})(\d*)/,'($1) $2-$3')
+})
+
+function fieldErr(wrapId, errId, show){
+  const w = document.getElementById(wrapId)
+  const e = document.getElementById(errId)
+  if(w) w.classList.toggle('err', show)
+  if(e) e.classList.toggle('show', show)
+}
+
+document.getElementById('apoiadorForm').addEventListener('submit', async function(e){
+  e.preventDefault()
+  let ok = true
+
+  const nome = document.getElementById('nome').value.trim()
+  fieldErr('wrap-nome','err-nome', nome.length < 3); if(nome.length < 3) ok = false
+
+  const cel = document.getElementById('cel').value.replace(/\D/g,'')
+  fieldErr('wrap-cel','err-cel', cel.length < 10); if(cel.length < 10) ok = false
+
+  const regiao = document.getElementById('regiao').value
+  fieldErr('wrap-regiao','err-regiao', !regiao); if(!regiao) ok = false
+
+  if(!toggleState['comunidade']){
+    document.getElementById('err-comunidade').classList.add('show'); ok = false
+  } else document.getElementById('err-comunidade').classList.remove('show')
+
+  const como = document.getElementById('como').value
+  fieldErr('wrap-como','err-como', !como); if(!como) ok = false
+
+  const acompanha = document.getElementById('acompanha').value
+  fieldErr('wrap-acompanha','err-acompanha', !acompanha); if(!acompanha) ok = false
+
+  if(!toggleState['ajudar']){
+    document.getElementById('err-ajudar').classList.add('show'); ok = false
+  } else document.getElementById('err-ajudar').classList.remove('show')
+
+  const errLgpd = document.getElementById('err-lgpd')
+  if(!toggleState['lgpd'] || toggleState['lgpd'] === 'nao'){
+    errLgpd.textContent = toggleState['lgpd'] === 'nao'
+      ? 'É necessário autorizar para prosseguir.'
+      : 'Você precisa fazer uma escolha para continuar.'
+    errLgpd.classList.add('show'); ok = false
+  } else errLgpd.classList.remove('show')
+
+  if(!ok){
+    document.querySelector('.err, .err-toggle.show, .err-msg.show')
+      ?.scrollIntoView({behavior:'smooth',block:'center'})
+    return
+  }
+
+  const btn = document.getElementById('btnSubmit')
+  document.getElementById('btnText').style.display = 'none'
+  document.getElementById('spinner').style.display = 'block'
+  btn.disabled = true
+
+  const APPS_SCRIPT_URL = 'COLE_SUA_URL_AQUI'
+
+  const formas = [...document.querySelectorAll('input[name="formas"]:checked')].map(i => i.value)
+
+  const payload = {
+    nome,
+    cel: document.getElementById('cel').value,
+    regiao: document.getElementById('regiao').value,
+    comunidade: toggleState['comunidade'],
+    comunidade_nome: document.getElementById('comunidade_nome')?.value || '',
+    comunidade_papel: document.getElementById('comunidade_papel')?.value || '',
+    como: document.getElementById('como').value,
+    acompanha: document.getElementById('acompanha').value,
+    ajudar: toggleState['ajudar'],
+    formas,
+    msg: document.getElementById('msg').value
+  }
+
+  try {
+    await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+  } catch(err) {
+    console.error('Erro ao enviar:', err)
+  }
+
+  document.getElementById('formWrap').style.display = 'none'
+  document.getElementById('successWrap').style.display = 'block'
+  window.scrollTo({top:0,behavior:'smooth'})
+})
+
+function resetForm(){
+  document.getElementById('apoiadorForm').reset()
+  document.getElementById('btnText').style.display = 'inline'
+  document.getElementById('spinner').style.display = 'none'
+  document.getElementById('btnSubmit').disabled = false
+  Object.keys(toggleState).forEach(k => delete toggleState[k])
+  document.querySelectorAll('.toggle-card').forEach(c => c.classList.remove('selected-yes','selected-no'))
+  document.querySelectorAll('.err-msg,.err-toggle').forEach(e => e.classList.remove('show'))
+  document.querySelectorAll('.input-wrap').forEach(w => w.classList.remove('err'))
+  document.getElementById('formWrap').style.display = 'block'
+  document.getElementById('successWrap').style.display = 'none'
+  window.scrollTo({top:0,behavior:'smooth'})
+}
+</script>
+</body>
+</html>
